@@ -13,11 +13,11 @@ const Avatar = (props: AvatarProps) => {
   return (
     <>
       {!error && src ? (
+        // eslint-disable-next-line @next/next/no-img-element
         <img
           src={src}
           alt={`${username}'s avatar`}
           className="othent-avatar"
-          {...props}
           referrerPolicy="no-referrer"
           onError={() => setError(true)}
         />
