@@ -2349,11 +2349,6 @@ fill-range@^7.0.1:
   dependencies:
     to-regex-range "^5.0.1"
 
-find-chrome-bin@^1.0.5:
-  version "1.0.5"
-  resolved "https://registry.npmjs.org/find-chrome-bin/-/find-chrome-bin-1.0.5.tgz#45ba5c6599ece2ee9546e520475f29fd6f28d5c8"
-  integrity sha512-hz7lQfY012+IkiK4dJCp+kPCGurGLjbHhl9ngFeqr55ihS0eBhdKqCQamvHJvT59HSZB1tRORfMfRgTOpkLdxQ==
-
 find-root@^1.1.0:
   version "1.1.0"
   resolved "https://registry.npmjs.org/find-root/-/find-root-1.1.0.tgz#abcfc8ba76f708c42a97b3d685b7e9450bfb9ce4"

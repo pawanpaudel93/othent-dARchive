@@ -7,7 +7,6 @@ import { createHash } from "crypto";
 import { Manifest } from "./types";
 import path from 'node:path'
 import type { Buffer } from 'node:buffer'
-import { findChrome } from 'find-chrome-bin'
 import { execFile } from 'promisify-child-process'
 import { temporaryDirectory } from 'tempy'
 
@@ -176,11 +175,6 @@ export class HtmlScreenshotSaver {
     return await fsPromises.readFile(filePath)
   }
 
-  private async getChromeExecutablePath() {
-    const { executablePath } = await findChrome({})
-    return executablePath
-  }
-
   private getErrorMessage(error: unknown): string {
     if (
       typeof error === 'object'
@@ -200,19 +194,16 @@ export class HtmlScreenshotSaver {
 
   private async runBrowser({
     browserArgs,
-    browserExecutablePath,
     url,
     basePath,
     output,
   }: {
     browserArgs: string
-    browserExecutablePath: string
     url: string
     basePath: string
     output: string
   }) {
     const command = [
-    `--browser-executable-path=${browserExecutablePath}`,
     `--browser-args='${browserArgs}'`,
     url,
     `--output=${output}`,
@@ -233,7 +224,6 @@ export class HtmlScreenshotSaver {
       await this.runBrowser({
         browserArgs:
             '["--no-sandbox", "--window-size=1920,1080", "--start-maximized"]',
-        browserExecutablePath: await this.getChromeExecutablePath(),
         url,
         basePath: folderPath as string,
         output: path.resolve(folderPath, 'index.html'),
