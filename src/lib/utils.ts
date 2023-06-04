@@ -34,8 +34,8 @@ const getAuth0Client = () => createAuth0Client({
   domain: "othent.us.auth0.com",
   clientId: "dyegx4dZj5yOv0v0RkoUsc48CIqaNS6C",
   authorizationParams: {
-      redirect_uri: window.location.origin
-    }
+    redirect_uri: window.location.origin
+  }
 });
 
 export async function getAccessToken() {
@@ -46,7 +46,13 @@ export async function getAccessToken() {
   const authParams = { transaction_input: JSON.stringify({
       othentFunction: "uploadData",
       file_hash: file_hash,
-  }) }
+  })}
+  const isAuthenticated = auth0.isAuthenticated()
+  if (!isAuthenticated) {
+    await auth0.loginWithPopup({
+      authorizationParams: authParams
+    })
+  }
   const accessToken = await auth0.getTokenSilently({
       detailedResponse: true,
       cacheMode: "off", 
