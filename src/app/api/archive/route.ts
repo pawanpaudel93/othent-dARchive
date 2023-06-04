@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { HtmlScreenshotSaver } from "@/lib/save";
+import { HtmlScreenshotSaver } from "@/lib/archive";
 import {Manifest} from "@/lib/types"
 import fsPromises from "fs/promises"
 import { prepareFile, prepareManifest, uploadToBundlr } from "@/lib/archive";
