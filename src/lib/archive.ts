@@ -192,6 +192,7 @@ export class HtmlScreenshotSaver {
     }
   }
 
+
   private async runBrowser({
     browserArgs,
     url,
@@ -211,7 +212,7 @@ export class HtmlScreenshotSaver {
     `--user-agent=${USER_AGENT}`,
     `--browser-server=${this.browserServer}`,
     ]
-    await execFile('single-file', command)
+    await execFile("single-file", command)
   }
 
   public save = async (url: string, folderPath?: string): Promise<SaveReturnType> => {
@@ -222,8 +223,7 @@ export class HtmlScreenshotSaver {
       await fsPromises.stat(folderPath)
 
       await this.runBrowser({
-        browserArgs:
-            '["--no-sandbox", "--window-size=1920,1080", "--start-maximized"]',
+        browserArgs: '["--no-sandbox", "--window-size=1920,1080", "--start-maximized"]',
         url,
         basePath: folderPath as string,
         output: path.resolve(folderPath, 'index.html'),
