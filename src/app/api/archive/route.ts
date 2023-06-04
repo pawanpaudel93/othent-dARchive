@@ -70,7 +70,7 @@ export async function POST(request: Request) {
         headers: { "Content-Type": "application/json" },
       });
     } else {
-      throw Error("Archive error")
+      throw Error(result.message)
     }
   } catch (error: any) {
     if (folderPath) {
