@@ -20,9 +20,7 @@ import { Formik, Form, Field, FormikValues, FormikState } from "formik";
 import { ModalLocation, OthentLogin } from "@/components/othent";
 import { useState } from "react";
 import NextLink from "next/link";
-import { getAccessToken } from "@/lib/utils";
-
-import { getErrorMessage } from "@/lib/utils";
+import { getAccessToken, getErrorMessage} from "@/lib/utils";
 import { usePersistStore } from "@/lib/store";
 
 interface MyFormValues {
@@ -34,7 +32,7 @@ interface IArchive {
   id: string;
   timestamp: string;
   title: string;
-  contentID: string;
+  txID: string;
   contentURL: string;
 }
 
@@ -43,12 +41,12 @@ const Archive = () => {
   const toast = useToast();
   const initialValues: MyFormValues = { url: "" };
   const [isLoading, setIsLoading] = useState(false);
-  const [contentID, setContentID] = useState("");
+  const [txID, setTxID] = useState("");
   const {isAuthenticated} =  usePersistStore()
   const [archive, setArchive] = useState<IArchive>({
     id: "",
     title: "",
-    contentID: "",
+    txID: "",
     timestamp: "",
     contentURL: "",
   });
@@ -74,6 +72,7 @@ const Archive = () => {
       const responseJSON = await response.json();
       console.log(responseJSON);
     } catch (error) {
+      console.error(error);
       toast({
         title: getErrorMessage(error),
         status: "error",
@@ -170,10 +169,10 @@ const Archive = () => {
         </Formik>
       </Box>
 
-      {!isLoading && contentID && (
+      {!isLoading && txID && (
         <Alert status="info">
           <AlertIcon />
-          <NextLink href={"/search/" + contentID}>
+          <NextLink href={"/search/" + txID}>
             <Link>See archived result</Link>
           </NextLink>
         </Alert>
