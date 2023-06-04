@@ -211,9 +211,7 @@ export class HtmlScreenshotSaver {
     `--user-agent=${USER_AGENT}`,
     `--browser-server=${this.browserServer}`,
     ]
-    await execFile('single-file', command, {
-      cwd: "node_modules/single-file-cli"
-    })
+    await execFile('single-file', command)
   }
 
   public save = async (url: string, folderPath?: string): Promise<SaveReturnType> => {
