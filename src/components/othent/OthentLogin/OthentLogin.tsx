@@ -49,7 +49,7 @@ const OthentLogin = (props: OthentLoginProps) => {
         >
           <div className="othent-login othent-login-modal-children">
             <UserInfo userdata={userData} />
-            <LogoutButton onlogout={onLogout} apiid={apiid} />
+            <LogoutButton onLogout={onLogout} apiid={apiid} />
           </div>
         </Modal>
       )}

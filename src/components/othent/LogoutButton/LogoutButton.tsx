@@ -6,12 +6,12 @@ import { getOthent } from "@/lib/utils";
 export interface LogoutButtonProps
   extends React.HTMLAttributes<HTMLButtonElement> {
   children?: React.ReactNode | string;
-  onlogout?: (logoutResponse: LogOutReturnProps) => void;
+  onLogout?: (logoutResponse: LogOutReturnProps) => void;
   apiid: string;
 }
 
 const LogoutButton = (props: LogoutButtonProps) => {
-  const { children = "Log Out", onlogout, apiid } = props;
+  const { children = "Log Out", onLogout, apiid } = props;
 
   const [clicked, setClicked] = useState(false);
 
@@ -20,7 +20,7 @@ const LogoutButton = (props: LogoutButtonProps) => {
     try {
       const othent = await getOthent(apiid);
       const logoutResponse = await othent.logOut();
-      if (onlogout) onlogout(logoutResponse);
+      if (onLogout) onLogout(logoutResponse);
     } catch (e) {
       console.log(`othent.logout() failed:`);
       console.log(e);
