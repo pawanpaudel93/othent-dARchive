@@ -1205,11 +1205,6 @@
     "@types/scheduler" "*"
     csstype "^3.0.2"
 
-"@types/resolve-bin@^0.4.1":
-  version "0.4.1"
-  resolved "https://registry.npmjs.org/@types/resolve-bin/-/resolve-bin-0.4.1.tgz#e5f2c2de1de8b77f2222a9e28e56ecc37028116c"
-  integrity sha512-5bWIuv+28N2+WxIQNdLwkzD+THqH221tR1rsjHV23CiM46+AZZ/U5V5KsuoBywkB/x7gK/xEBW1l9R7Ucdkcvg==
-
 "@types/scheduler@*":
   version "0.16.3"
   resolved "https://registry.npmjs.org/@types/scheduler/-/scheduler-0.16.3.tgz#cef09e3ec9af1d63d2a6cc5b383a737e24e6dcf5"
@@ -1759,11 +1754,6 @@ data-urls@^4.0.0:
     abab "^2.0.6"
     whatwg-mimetype "^3.0.0"
     whatwg-url "^12.0.0"
-
-dayjs@^1.11.8:
-  version "1.11.8"
-  resolved "https://registry.npmjs.org/dayjs/-/dayjs-1.11.8.tgz#4282f139c8c19dd6d0c7bd571e30c2d0ba7698ea"
-  integrity sha512-LcgxzFoWMEPO7ggRv1Y2N31hUf2R0Vj7fuy/m+Bg1K8rr+KAs1AEy4y9jd5DXe8pbHgX+srkHNS7TH6Q6ZhYeQ==
 
 debug@4, debug@4.3.4, debug@^4.1.1, debug@^4.3.2, debug@^4.3.4:
   version "4.3.4"
@@ -3478,7 +3468,7 @@ optionator@^0.9.1:
     type-check "^0.4.0"
     word-wrap "^1.2.3"
 
-othent@^1.0.616:
+othent@^1.0.619:
   version "1.0.619"
   resolved "https://registry.npmjs.org/othent/-/othent-1.0.619.tgz#206e6df1e2ba7ca9d29113870b0e9dc04fdeed5e"
   integrity sha512-Ya7suD6ZxUQ57XFFLwQEVKm11PEnTyqZVwLurVdNMgHpgVrU2oY971pjgDiwqDCIN5lRryUc56VJM/axl1W77Q==

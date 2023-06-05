@@ -15,11 +15,12 @@ import {
   Image,
   Alert,
   AlertIcon,
+  Spinner,
+  Text,
 } from "@chakra-ui/react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { useEffect, useState } from "react";
-import dayjs from "dayjs";
-import { getErrorMessage } from "@/lib/utils";
+import { formatDate, getErrorMessage } from "@/lib/utils";
 import { getArchives, ArchiveType } from "@/lib/utils";
 import { usePersistStore } from "@/lib/store";
 
@@ -56,77 +57,88 @@ export default function Search() {
 
   return (
     <Center>
-      <Center>
-        <Box
-          width={{
-            base: "100%",
-            // md: "80%",
-            // lg: "60%",
-          }}
-        >
-          <TableContainer>
-            <InfiniteScroll
-              dataLength={archives.length}
-              next={fetchData}
-              hasMore={hasNextPage && !isLoading}
-              loader={
-                <p style={{ textAlign: "center", marginTop: "5px" }}>
-                  <h4>Loading more archives...</h4>
-                </p>
-              }
-              endMessage={
-                <p style={{ textAlign: "center", marginTop: "5px" }}>
-                  <b>No more archives...</b>
-                </p>
-              }
-            >
-              <Table variant="striped">
-                <Thead>
-                  <Tr>
-                    <Th>Url</Th>
-                    <Th>Archive</Th>
-                  </Tr>
-                </Thead>
-                <Tbody>
-                  {archives.map((archive: ArchiveType) => (
-                    <Tr key={archive.id}>
-                      <Td>
-                        <VStack>
-                          <Link href={archive.webpage} isExternal>
-                            <Link color="blue">{archive.title}</Link>
-                          </Link>
-                          <Link href={archive.url} isExternal>
-                            {archive.url}
-                          </Link>
-                        </VStack>
-                      </Td>
-                      <Td>
-                        <VStack key={archive.id}>
-                          <Link href={archive.screenshot} isExternal>
-                            <Image
-                              src={archive.screenshot}
-                              style={{
-                                cursor: "pointer",
-                              }}
-                              boxSize="100px"
-                              alt={archive.title}
-                            />
-                          </Link>
-                          <small>
-                            {dayjs(archive.timestamp * 1000).format(
-                              "D MMM YYYY HH:mm"
-                            )}
-                          </small>
-                        </VStack>
-                      </Td>
+      {archives.length > 0 ? (
+        <Center>
+          <Box
+            width={{
+              base: "100%",
+              // md: "80%",
+              // lg: "60%",
+            }}
+          >
+            <TableContainer>
+              <InfiniteScroll
+                dataLength={archives.length}
+                next={fetchData}
+                hasMore={hasNextPage && !isLoading}
+                loader={
+                  <p style={{ textAlign: "center", marginTop: "5px" }}>
+                    <h4>Loading more archives...</h4>
+                  </p>
+                }
+                endMessage={
+                  <p style={{ textAlign: "center", marginTop: "5px" }}>
+                    <b>No more archives...</b>
+                  </p>
+                }
+              >
+                <Table variant="striped">
+                  <Thead>
+                    <Tr>
+                      <Th>Url</Th>
+                      <Th>Archive</Th>
                     </Tr>
-                  ))}
-                </Tbody>
-              </Table>
-            </InfiniteScroll>
-          </TableContainer>
-        </Box>
-      </Center>
+                  </Thead>
+                  <Tbody>
+                    {archives.map((archive: ArchiveType) => (
+                      <Tr key={archive.id}>
+                        <Td>
+                          <VStack>
+                            <Link href={archive.webpage} isExternal>
+                              <Link color="blue">
+                                {archive.title || archive.webpage}
+                              </Link>
+                            </Link>
+                            <Link href={archive.url} isExternal>
+                              {archive.url}
+                            </Link>
+                          </VStack>
+                        </Td>
+                        <Td>
+                          <VStack key={archive.id}>
+                            <Link href={archive.screenshot} isExternal>
+                              <Image
+                                src={archive.screenshot}
+                                style={{
+                                  cursor: "pointer",
+                                }}
+                                boxSize="100px"
+                                alt={archive.title}
+                              />
+                            </Link>
+                            <small>{formatDate(archive.timestamp)}</small>
+                          </VStack>
+                        </Td>
+                      </Tr>
+                    ))}
+                  </Tbody>
+                </Table>
+              </InfiniteScroll>
+            </TableContainer>
+          </Box>
+        </Center>
+      ) : (
+        <VStack>
+          <Text>Loading your archives...</Text>
+          <Spinner
+            thickness="4px"
+            speed="0.65s"
+            emptyColor="gray.200"
+            color="blue.500"
+            size="xl"
+          />
+        </VStack>
+      )}
       {archives.length === 0 && !isLoading && (
         <Center mt={20}>
           <Alert status="info">

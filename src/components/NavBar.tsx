@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import {
   Box,
   Flex,
@@ -16,6 +16,7 @@ import NextLink, { LinkProps } from "next/link";
 import { HamburgerIcon, CloseIcon, SunIcon, MoonIcon } from "@chakra-ui/icons";
 import { usePathname } from "next/navigation";
 import { ModalLocation, OthentLogin } from "@/components/othent";
+import { usePersistStore } from "@/lib/store";
 
 interface NavItem {
   key: number;
@@ -55,10 +56,10 @@ const Logo = () => {
 };
 
 const NavLink = ({ href, children }: NavLinkProps) => {
-  const pathname = usePathname()
+  const pathname = usePathname();
   const isActive = pathname === href;
   const color = useColorModeValue("#0E76FD", "selected");
-  const bg = useColorModeValue("gray.200", "gray.700")
+  const bg = useColorModeValue("gray.200", "gray.700");
 
   if (isActive) {
     return (
@@ -71,7 +72,7 @@ const NavLink = ({ href, children }: NavLinkProps) => {
           rounded={"md"}
           _hover={{
             textDecoration: "none",
-            bg
+            bg,
           }}
           border="1px solid"
         >
@@ -98,9 +99,10 @@ const NavLink = ({ href, children }: NavLinkProps) => {
   );
 };
 
- const NavBar = function() {
+const NavBar = function () {
   const { colorMode, toggleColorMode } = useColorMode();
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { isAuthenticated } = usePersistStore();
   return (
     <>
       <Flex as="header" position="fixed" w="100%" top={0} zIndex={1000}>
@@ -128,16 +130,20 @@ const NavLink = ({ href, children }: NavLinkProps) => {
                 spacing={4}
                 display={{ base: "none", md: "flex" }}
               >
-                {NavItems.map((navItem) => (
-                  <NavLink key={navItem.key} href={navItem.href as string}>
-                    {navItem.label}
-                  </NavLink>
-                ))}
+                {isAuthenticated &&
+                  NavItems.map((navItem) => (
+                    <NavLink key={navItem.key} href={navItem.href as string}>
+                      {navItem.label}
+                    </NavLink>
+                  ))}
               </HStack>
             </HStack>
             <Flex alignItems={"center"}>
               <Stack direction={"row"} spacing={3}>
-                <OthentLogin apiid={process.env.NEXT_PUBLIC_OTHENT_API_ID as string} location={ModalLocation["bottom-left"]}/>
+                <OthentLogin
+                  apiid={process.env.NEXT_PUBLIC_OTHENT_API_ID as string}
+                  location={ModalLocation["bottom-left"]}
+                />
                 <Button onClick={toggleColorMode} mr={3}>
                   {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
                 </Button>
@@ -148,11 +154,12 @@ const NavLink = ({ href, children }: NavLinkProps) => {
           {isOpen ? (
             <Box pb={4} display={{ md: "none" }}>
               <Stack as={"nav"} spacing={4}>
-                {NavItems.map((navItem) => (
-                  <NavLink key={navItem.key} href={navItem.href as string}>
-                    {navItem.label}
-                  </NavLink>
-                ))}
+                {isAuthenticated &&
+                  NavItems.map((navItem) => (
+                    <NavLink key={navItem.key} href={navItem.href as string}>
+                      {navItem.label}
+                    </NavLink>
+                  ))}
               </Stack>
             </Box>
           ) : null}

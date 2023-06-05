@@ -159,7 +159,7 @@ export const getArchives = async (
   cursor: string;
 }> => {
   const archives: ArchiveType[] = [];
-  const result = await query(walletAddress, 2, cursor);
+  const result = await query(walletAddress, 100, cursor);
   hasNextPage = result.hasNextPage;
   cursor = result.cursor ?? "";
   if (result.archivedTransactions.length > 0) {
@@ -195,3 +195,33 @@ export const getAllArchives = async (
   }
   return archives;
 };
+
+function getMonthName(month: number) {
+  const monthNames = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
+
+  return monthNames[month - 1];
+}
+
+export function formatDate(timestamp: number) {
+  const date = new Date(timestamp * 1000);
+  const day = date.getDate();
+  const month = date.getMonth() + 1;
+  const year = date.getFullYear();
+  const hours = date.getHours();
+  const minutes = date.getMinutes();
+
+  return `${day} ${getMonthName(month)} ${year} ${hours}:${minutes}`;
+}
