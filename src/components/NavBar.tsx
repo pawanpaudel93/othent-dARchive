@@ -36,8 +36,8 @@ const NavItems: Array<NavItem> = [
   },
   {
     key: 1,
-    label: "Search",
-    href: "/search",
+    label: "My Archives",
+    href: "/my-archives",
   },
 ];
 
