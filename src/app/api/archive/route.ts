@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { HtmlScreenshotSaver } from "@/lib/archive";
+import { HtmlScreenshotSaver } from "save-html-screenshot";
 import {Manifest} from "@/lib/types"
 import fsPromises from "fs/promises"
 import { prepareFile, prepareManifest, uploadToBundlr } from "@/lib/archive";
@@ -10,12 +10,12 @@ export async function POST(request: Request) {
   try {
     const {url, accessToken, address} = await request.json();
 
-    const saver = new HtmlScreenshotSaver({
+    const saver = new HtmlScreenshotSaver(process.env.BROWSERLESS_API_KEY ? {
       apiKey: process.env.BROWSERLESS_API_KEY as string,
       windowSize: "1920,1080",
       userAgent: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36",
       timeout: 60000
-    })
+    }: undefined)
 
     const result = await saver.save(url)
 
@@ -73,6 +73,7 @@ export async function POST(request: Request) {
       throw Error(result.message)
     }
   } catch (error: any) {
+    console.error(error);
     if (folderPath) {
       await fsPromises.rm(folderPath, { recursive: true, force: true })
     }

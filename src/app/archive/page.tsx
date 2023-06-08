@@ -82,6 +82,7 @@ const Archive = () => {
         screenshot: `https://arweave.net/${txID}/screenshot`,
       });
     } catch (error) {
+      console.trace(error);
       toast({
         title: getErrorMessage(error),
         status: "error",
