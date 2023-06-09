@@ -42,8 +42,8 @@ const LoginButton = (props: LoginButtonProps) => {
         children
       ) : (
         <>
-          Login&nbsp;with&nbsp;
-          <span className="othent-button-login-brandname">Othent</span>
+          Sign in&nbsp;with&nbsp;
+          <span className="othent-button-login-brandname">Google</span>
         </>
       )}
     </button>
