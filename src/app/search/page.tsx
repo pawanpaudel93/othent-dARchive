@@ -181,8 +181,8 @@ export default function Search() {
           </TableContainer>
         )}
         {archives.length === 0 && url !== "" && searchClicked && isLoading && (
-          <VStack mt="40px">
-            <Text>Loading your archives...</Text>
+          <VStack mt="20px">
+            <Text>Searching archives...</Text>
             <Spinner
               thickness="4px"
               speed="0.65s"
