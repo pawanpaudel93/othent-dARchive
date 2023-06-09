@@ -22,6 +22,7 @@ interface NavItem {
   key: number;
   label: string;
   href?: string;
+  isAuthentionRequired?: boolean;
 }
 
 interface NavLinkProps extends LinkProps {
@@ -34,16 +35,19 @@ const NavItems: Array<NavItem> = [
     key: 0,
     label: "Archive",
     href: "/archive",
+    isAuthentionRequired: false,
   },
   {
     key: 1,
     label: "My Archives",
     href: "/my-archives",
+    isAuthentionRequired: true,
   },
   {
     key: 2,
     label: "Search",
     href: "/search",
+    isAuthentionRequired: false,
   },
 ];
 
@@ -106,6 +110,9 @@ const NavBar = function () {
   const { colorMode, toggleColorMode } = useColorMode();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { isAuthenticated } = usePersistStore();
+  const navItems = NavItems.filter(({ isAuthentionRequired }) =>
+    isAuthenticated ? isAuthentionRequired : !isAuthentionRequired
+  );
   return (
     <>
       <Flex as="header" position="fixed" w="100%" top={0} zIndex={1000}>
@@ -133,12 +140,11 @@ const NavBar = function () {
                 spacing={4}
                 display={{ base: "none", md: "flex" }}
               >
-                {isAuthenticated &&
-                  NavItems.map((navItem) => (
-                    <NavLink key={navItem.key} href={navItem.href as string}>
-                      {navItem.label}
-                    </NavLink>
-                  ))}
+                {navItems.map((navItem) => (
+                  <NavLink key={navItem.key} href={navItem.href as string}>
+                    {navItem.label}
+                  </NavLink>
+                ))}
               </HStack>
             </HStack>
             <Flex alignItems={"center"}>
@@ -157,12 +163,11 @@ const NavBar = function () {
           {isOpen ? (
             <Box pb={4} display={{ md: "none" }}>
               <Stack as={"nav"} spacing={4}>
-                {isAuthenticated &&
-                  NavItems.map((navItem) => (
-                    <NavLink key={navItem.key} href={navItem.href as string}>
-                      {navItem.label}
-                    </NavLink>
-                  ))}
+                {navItems.map((navItem) => (
+                  <NavLink key={navItem.key} href={navItem.href as string}>
+                    {navItem.label}
+                  </NavLink>
+                ))}
               </Stack>
             </Box>
           ) : null}
