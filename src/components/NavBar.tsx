@@ -111,7 +111,7 @@ const NavBar = function () {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { isAuthenticated } = usePersistStore();
   const navItems = NavItems.filter(({ isAuthentionRequired }) =>
-    isAuthenticated ? isAuthentionRequired : !isAuthentionRequired
+    isAuthenticated ? true : !isAuthentionRequired
   );
   return (
     <>
