@@ -1,13 +1,10 @@
 "use client";
 
 import {
-  Box,
   Td,
   Table,
   TableContainer,
   Tbody,
-  Th,
-  Thead,
   Tr,
   Center,
   VStack,
@@ -17,6 +14,7 @@ import {
   AlertIcon,
   Spinner,
   Text,
+  Stack,
 } from "@chakra-ui/react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { useEffect, useState } from "react";
@@ -59,41 +57,43 @@ export default function Search() {
     <Center>
       {archives.length > 0 ? (
         <Center>
-          <Box
+          <TableContainer
             width={{
               base: "100%",
-              // md: "80%",
-              // lg: "60%",
+              md: "80%",
+              lg: "60%",
             }}
+            maxW="100%"
           >
-            <TableContainer>
-              <InfiniteScroll
-                dataLength={archives.length}
-                next={fetchData}
-                hasMore={hasNextPage && !isLoading}
-                loader={
-                  <p style={{ textAlign: "center", marginTop: "5px" }}>
-                    <h4>Loading more archives...</h4>
-                  </p>
-                }
-                endMessage={
-                  <p style={{ textAlign: "center", marginTop: "5px" }}>
-                    <b>No more archives...</b>
-                  </p>
-                }
-              >
-                <Table variant="striped">
-                  <Thead>
-                    <Tr>
-                      <Th>Url</Th>
-                      <Th>Archive</Th>
-                    </Tr>
-                  </Thead>
-                  <Tbody>
-                    {archives.map((archive: ArchiveType) => (
-                      <Tr key={archive.id}>
-                        <Td>
-                          <VStack>
+            <InfiniteScroll
+              dataLength={archives.length}
+              next={fetchData}
+              hasMore={hasNextPage && !isLoading}
+              loader={
+                <p style={{ textAlign: "center", marginTop: "5px" }}>
+                  <h4>Loading more archives...</h4>
+                </p>
+              }
+              endMessage={
+                <p style={{ textAlign: "center", marginTop: "5px" }}>
+                  <b>No more archives...</b>
+                </p>
+              }
+            >
+              <Table variant="striped">
+                <Tbody>
+                  {archives.map((archive: ArchiveType) => (
+                    <Tr key={archive.id}>
+                      <Td
+                        overflow="hidden"
+                        whiteSpace="break-spaces"
+                        textOverflow="ellipsis"
+                      >
+                        <Stack
+                          direction={["column", "row"]}
+                          justifyContent="space-between"
+                        >
+                          <VStack width="80%">
                             <Link
                               href={archive.webpage}
                               color="blue"
@@ -105,9 +105,7 @@ export default function Search() {
                               {archive.url}
                             </Link>
                           </VStack>
-                        </Td>
-                        <Td>
-                          <VStack key={archive.id}>
+                          <VStack>
                             <Link href={archive.screenshot} isExternal>
                               <Image
                                 src={archive.screenshot}
@@ -120,14 +118,14 @@ export default function Search() {
                             </Link>
                             <small>{formatDate(archive.timestamp)}</small>
                           </VStack>
-                        </Td>
-                      </Tr>
-                    ))}
-                  </Tbody>
-                </Table>
-              </InfiniteScroll>
-            </TableContainer>
-          </Box>
+                        </Stack>
+                      </Td>
+                    </Tr>
+                  ))}
+                </Tbody>
+              </Table>
+            </InfiniteScroll>
+          </TableContainer>
         </Center>
       ) : (
         <VStack>
