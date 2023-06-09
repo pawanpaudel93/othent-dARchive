@@ -20,8 +20,8 @@ import {
   Tr,
   HStack,
   IconButton,
+  useToast,
 } from "@chakra-ui/react";
-import { useToast } from "@chakra-ui/react";
 import isURL from "validator/lib/isURL";
 import { Formik, Form, Field, FormikValues, FormikState } from "formik";
 import { ModalLocation, OthentLogin } from "@/components/othent";

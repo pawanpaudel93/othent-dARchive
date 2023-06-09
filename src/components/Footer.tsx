@@ -1,10 +1,9 @@
-'use client'
+"use client";
 
 import {
   Box,
   chakra,
   Container,
-  Link,
   Stack,
   Text,
   useColorModeValue,
@@ -74,7 +73,7 @@ export function Footer() {
         align={{ base: "center", md: "center" }}
       >
         <Logo />
-        <Text>© 2023 Decentralized Archive. All rights reserved</Text>
+        <Text>©2023 Decentralized ARchive. All rights reserved</Text>
         <Stack direction={"row"} spacing={6}>
           <SocialButton label={"Twitter"} href={"#"}>
             <FaTwitter />

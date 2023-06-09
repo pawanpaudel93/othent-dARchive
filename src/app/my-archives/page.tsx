@@ -94,10 +94,12 @@ export default function Search() {
                       <Tr key={archive.id}>
                         <Td>
                           <VStack>
-                            <Link href={archive.webpage} isExternal>
-                              <Link color="blue">
-                                {archive.title || archive.webpage}
-                              </Link>
+                            <Link
+                              href={archive.webpage}
+                              color="blue"
+                              isExternal
+                            >
+                              {archive.title || archive.webpage}
                             </Link>
                             <Link href={archive.url} isExternal>
                               {archive.url}

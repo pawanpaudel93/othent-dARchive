@@ -9,7 +9,6 @@ import {
   Button,
   Image,
   Icon,
-  IconButton,
   createIcon,
   IconProps,
   useColorModeValue,
@@ -55,7 +54,7 @@ export default function Home() {
             </Text>
           </Heading>
           <Text color={"gray.500"}>
-            dArchive is a decentralized archiving application that lets you
+            dARchive is a decentralized archiving application that lets you
             snapshot any webpage anytime to create a digital archive so you can
             access it forever.
           </Text>
@@ -75,16 +74,6 @@ export default function Home() {
             >
               Archive now
             </Button>
-            {/* <Button
-              rounded={"full"}
-              size={"lg"}
-              fontWeight={"normal"}
-              px={6}
-              leftIcon={<PlayIcon h={4} w={4} color={"gray.300"} />}
-              onClick={() => router.push("/how-it-works")}
-            >
-              How It Works
-            </Button> */}
           </Stack>
         </Stack>
         <Flex
@@ -111,18 +100,6 @@ export default function Home() {
             width={"full"}
             overflow={"hidden"}
           >
-            <IconButton
-              aria-label={"Play Button"}
-              variant={"ghost"}
-              _hover={{ bg: "transparent" }}
-              icon={<PlayIcon w={12} h={12} />}
-              size={"lg"}
-              color={"white"}
-              position={"absolute"}
-              left={"50%"}
-              top={"50%"}
-              transform={"translateX(-50%) translateY(-50%)"}
-            />
             <Image
               alt={"Hero Image"}
               fit={"cover"}

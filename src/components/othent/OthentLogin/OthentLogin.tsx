@@ -18,17 +18,17 @@ export interface OthentLoginProps extends React.HTMLAttributes<HTMLDivElement> {
 const OthentLogin = (props: OthentLoginProps) => {
   const { children, location = ModalLocation.bottom, apiid } = props;
 
-  const {userData, setUserData, setIsAuthenticated} = usePersistStore()
+  const { userData, setUserData, setIsAuthenticated } = usePersistStore();
 
   const onLogin = (userData: LogInReturnProps) => {
     setUserData(userData);
-    setIsAuthenticated(true)
+    setIsAuthenticated(true);
   };
 
   const onLogout = (logoutResponse: LogOutReturnProps) => {
     if (logoutResponse.response) {
       setUserData(null);
-      setIsAuthenticated(false)
+      setIsAuthenticated(false);
     }
   };
 

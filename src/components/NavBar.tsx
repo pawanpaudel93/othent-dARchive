@@ -2,7 +2,6 @@
 import {
   Box,
   Flex,
-  Link,
   Button,
   useColorModeValue,
   Stack,
@@ -12,6 +11,7 @@ import {
   IconButton,
   Heading,
 } from "@chakra-ui/react";
+import { Link } from "@chakra-ui/next-js";
 import NextLink, { LinkProps } from "next/link";
 import { HamburgerIcon, CloseIcon, SunIcon, MoonIcon } from "@chakra-ui/icons";
 import { usePathname } from "next/navigation";
@@ -63,28 +63,9 @@ const NavLink = ({ href, children }: NavLinkProps) => {
 
   if (isActive) {
     return (
-      <NextLink href={href} passHref>
-        <Link
-          fontWeight="bold"
-          color={color}
-          px={2}
-          py={1}
-          rounded={"md"}
-          _hover={{
-            textDecoration: "none",
-            bg,
-          }}
-          border="1px solid"
-        >
-          {children}
-        </Link>
-      </NextLink>
-    );
-  }
-
-  return (
-    <NextLink href={href} passHref>
       <Link
+        fontWeight="bold"
+        color={color}
         px={2}
         py={1}
         rounded={"md"}
@@ -92,10 +73,27 @@ const NavLink = ({ href, children }: NavLinkProps) => {
           textDecoration: "none",
           bg,
         }}
+        border="1px solid"
+        href={href}
       >
         {children}
       </Link>
-    </NextLink>
+    );
+  }
+
+  return (
+    <Link
+      px={2}
+      py={1}
+      rounded={"md"}
+      _hover={{
+        textDecoration: "none",
+        bg,
+      }}
+      href={href}
+    >
+      {children}
+    </Link>
   );
 };
 
@@ -120,7 +118,7 @@ const NavBar = function () {
                 <Box cursor="pointer" p={2}>
                   <HStack>
                     <Logo />
-                    <Heading size="md">dArchive</Heading>
+                    <Heading size="md">dARchive</Heading>
                   </HStack>
                 </Box>
               </NextLink>
