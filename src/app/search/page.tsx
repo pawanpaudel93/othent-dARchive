@@ -1,6 +1,11 @@
 "use client";
 
 import {
+  FormControl,
+  Button,
+  Input,
+  Box,
+  HStack,
   Td,
   Table,
   TableContainer,
@@ -17,30 +22,28 @@ import {
   Stack,
 } from "@chakra-ui/react";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { useEffect, useState } from "react";
-import { formatDate, getErrorMessage } from "@/lib/utils";
-import { getArchives, ArchiveType } from "@/lib/utils";
-import { usePersistStore } from "@/lib/store";
+import { SearchIcon } from "@chakra-ui/icons";
+import { FormEvent, useState } from "react";
+import {
+  getErrorMessage,
+  formatDate,
+  ArchiveType,
+  searchArchives,
+} from "@/lib/utils";
 
-export default function MyArchives() {
-  const { userData } = usePersistStore();
-  const [isLoading, setIsLoading] = useState(true);
+export default function Search() {
   const [cursor, setCursor] = useState("");
   const [archives, setArchives] = useState<ArchiveType[]>([]);
   const [hasNextPage, setHasNextPage] = useState(true);
-
-  useEffect(() => {
-    if (userData?.contract_id) {
-      fetchData();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [userData?.contract_id]);
+  const [url, setUrl] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [searchClicked, setSearchClicked] = useState(false);
 
   async function fetchData() {
     setIsLoading(true);
     try {
-      const response = await getArchives(
-        userData?.contract_id as string,
+      const response = await searchArchives(
+        url.replace(/\/$/, ""),
         hasNextPage,
         cursor
       );
@@ -53,10 +56,60 @@ export default function MyArchives() {
     setIsLoading(false);
   }
 
+  async function onSubmit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setSearchClicked(true);
+    await fetchData();
+  }
+
   return (
-    <Center>
-      {archives.length > 0 ? (
-        <Center>
+    <div>
+      <Center>
+        <Box
+          position="fixed"
+          top="80px"
+          borderWidth="1px"
+          boxShadow="lg"
+          borderRadius="lg"
+          overflow="hidden"
+          width={{
+            base: "100%",
+            lg: "50%",
+          }}
+          p={3}
+          zIndex={1}
+        >
+          <form onSubmit={onSubmit}>
+            <HStack px={2}>
+              <FormControl>
+                <Input
+                  placeholder="Search URL"
+                  value={url}
+                  onChange={(e) => {
+                    setSearchClicked(false);
+                    setHasNextPage(false);
+                    setCursor("");
+                    setArchives([]);
+                    setUrl(e.target.value);
+                  }}
+                  required
+                />
+              </FormControl>
+
+              <Button
+                colorScheme="blue"
+                isLoading={isLoading}
+                p={2}
+                type="submit"
+              >
+                <SearchIcon />
+              </Button>
+            </HStack>
+          </form>
+        </Box>
+      </Center>
+      <Center mt="100px">
+        {archives.length > 0 && (
           <TableContainer
             width={{
               base: "100%",
@@ -126,27 +179,28 @@ export default function MyArchives() {
               </Table>
             </InfiniteScroll>
           </TableContainer>
-        </Center>
-      ) : (
-        <VStack>
-          <Text>Loading your archives...</Text>
-          <Spinner
-            thickness="4px"
-            speed="0.65s"
-            emptyColor="gray.200"
-            color="blue.500"
-            size="xl"
-          />
-        </VStack>
-      )}
-      {archives.length === 0 && !isLoading && (
-        <Center mt={20}>
-          <Alert status="info">
-            <AlertIcon />
-            No archives found
-          </Alert>
-        </Center>
-      )}
-    </Center>
+        )}
+        {archives.length === 0 && url !== "" && searchClicked && isLoading && (
+          <VStack mt="40px">
+            <Text>Loading your archives...</Text>
+            <Spinner
+              thickness="4px"
+              speed="0.65s"
+              emptyColor="gray.200"
+              color="blue.500"
+              size="xl"
+            />
+          </VStack>
+        )}
+        {archives.length === 0 && url !== "" && searchClicked && !isLoading && (
+          <Center mt={20}>
+            <Alert status="info">
+              <AlertIcon />
+              No archives found
+            </Alert>
+          </Center>
+        )}
+      </Center>
+    </div>
   );
 }

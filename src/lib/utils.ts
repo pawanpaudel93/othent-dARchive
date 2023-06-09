@@ -102,7 +102,17 @@ export async function getAccessToken() {
   return accessToken;
 }
 
-const query = async (walletAddress: string, first = 100, cursor?: string) => {
+const query = async ({
+  first,
+  cursor,
+  walletAddress,
+  url,
+}: {
+  first: number;
+  cursor?: string;
+  walletAddress?: string;
+  url?: string;
+}) => {
   const query = {
     query: `
           query {
@@ -113,7 +123,16 @@ const query = async (walletAddress: string, first = 100, cursor?: string) => {
                       { name: "App-Name", values: ["${APP_NAME}"] }
                       { name: "Content-Type", values: ["${MANIFEST_CONTENT_TYPE}"] }
                       { name: "App-Version", values: ["${APP_VERSION}"]}
-                      { name: "Archiver", values: ["${walletAddress}"]}
+                      ${
+                        walletAddress
+                          ? `{ name: "Archiver", values: ["${walletAddress}"]}`
+                          : ""
+                      }
+                      ${
+                        url
+                          ? `{name: "Url", values: ["${url}", "${url}/"]}`
+                          : ""
+                      }
                   ]
               ) {
                   pageInfo { 
@@ -159,7 +178,40 @@ export const getArchives = async (
   cursor: string;
 }> => {
   const archives: ArchiveType[] = [];
-  const result = await query(walletAddress, 100, cursor);
+  const result = await query({ first: 100, cursor, walletAddress });
+  hasNextPage = result.hasNextPage;
+  cursor = result.cursor ?? "";
+  if (result.archivedTransactions.length > 0) {
+    archives.push(
+      ...result.archivedTransactions.map(
+        (transaction: { node: { tags: Tag[]; id: string } }) => {
+          const { id, tags } = transaction.node;
+          return {
+            id,
+            url: tags[5]?.value ?? "",
+            title: tags[3]?.value ?? "",
+            webpage: `https://arweave.net/${id}`,
+            screenshot: `https://arweave.net/${id}/screenshot`,
+            timestamp: parseInt(tags[6]?.value ?? "0"),
+          };
+        }
+      )
+    );
+  }
+  return { archives, hasNextPage, cursor };
+};
+
+export const searchArchives = async (
+  url: string,
+  hasNextPage: boolean,
+  cursor: string
+): Promise<{
+  archives: ArchiveType[];
+  hasNextPage: boolean;
+  cursor: string;
+}> => {
+  const archives: ArchiveType[] = [];
+  const result = await query({ first: 100, cursor, url });
   hasNextPage = result.hasNextPage;
   cursor = result.cursor ?? "";
   if (result.archivedTransactions.length > 0) {
