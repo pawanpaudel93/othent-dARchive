@@ -54,9 +54,9 @@ export default function Home() {
             </Text>
           </Heading>
           <Text color={"gray.500"}>
-            dARchive is a decentralized archiving application that lets you
-            snapshot any webpage anytime to create a digital archive so you can
-            access it forever.
+            <b>dARchive</b> is a decentralized archiving app that lets you
+            snapshot any webpage anytime to create a digital archive and save it
+            to <b>ARweave</b> so that you can access it forever.
           </Text>
           <Stack
             spacing={{ base: 4, sm: 6 }}
