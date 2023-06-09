@@ -1,31 +1,30 @@
 <p align="center">
-  <a href="" rel="noopener">
- <img width=200px height=200px src="public/logo.svg" alt="dARchive"></a>
+  <a href="" rel="noopener"><img width=200px height=200px src="public/logo.svg" alt="dARchive"></a>
 </p>
 
 <h3 align="center">othent-dARchive</h3>
 
 ---
 
-<p align="center"> Decentralized Archive (dARchive) is a decentralized application to create an archive of web pages that can always be accessed online even if the original page disappears.
+<p align="center"> Decentralized Archive (<b>dARchive</b>) is a decentralized application to create an archive of web pages that can always be accessed online even if the original page disappears.
     <br>
 </p>
 
-## 🧐 About <a name = "about"></a>
+## 🧐 About
 
-dARchive is a decentralized archiving application that lets you snapshot any webpage anytime to create a digital archive so you can access it forever. It uses different web3 technologies to provide the decentralized version of the archiving application called archive.today
+**dARchive** is a decentralized archiving app that lets you snapshot any webpage anytime to create a digital archive and save it to **[Arweave](https://arweave.org/ "Arweave")** using **[Othent](https://othent.io/ "Othent")** so that you can access it forever.
 
-It allows a user to save a webpage HTML and screenshot to the decentralized storage called Arweave. The user can search the stored webpages based on different filters and can view and download the saved webpages and screenshots. This can be useful if you want to take a 'snapshot' of a page that could change soon: price list, job offer, real estate listing, drunk blog post, etc.
+It allows a user to save a webpage HTML and screenshot to the decentralized storage called Arweave. The user can search the stored webpages and can view and download the saved webpages and screenshots. This can be useful if you want to take a 'snapshot' of a page that could change soon: price list, job offer, real estate listing, drunk blog post, etc.
 
-## 🎈 Usage <a name="usage"></a>
+## 🎈 Usage
 
-1. Archive: User connects a wallet to the dApp then visit the archive page and enter a URL to archive. Then, the html and screenshot of the webpage is saved and uploaded via Othent to Arweave to store it permanently.
+1. **Archive**: Users can sign in using their Gmail account, visit the archive page, and enter a URL to create an archive. Then, the html and screenshot of the webpage is uploaded via Othent to Arweave to store it permanently.
 
-2. My Archives: User can see their archived webpages and screenshots and also can download them.
+2. **My Archives**: Users can view their archived webpages and screenshots.
 
-3. Search: User can query with filters to get the search results and view the saved webpages and screenshots and also can download them.
+3. **Search**: Users can search using a URL to retrieve the search results. They can view the saved webpages and screenshots.
 
-## ⛏️ Built Using <a name = "built_using"></a>
+## ⛏️ Built Using
 
 - [Othent](https://othent.io) - Web3 transactions with existing traditional social logins.
 - [Nextjs](https://nextjs.org/) - Reactjs Web Development Framework
