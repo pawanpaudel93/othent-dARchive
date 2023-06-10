@@ -16,6 +16,46 @@
 
 It allows a user to save a webpage HTML and screenshot to the decentralized storage called Arweave. The user can search the stored webpages and can view and download the saved webpages and screenshots. This can be useful if you want to take a 'snapshot' of a page that could change soon: price list, job offer, real estate listing, drunk blog post, etc.
 
+## Setup
+
+```sh
+npm install
+
+# or
+
+yarn
+```
+
+Rename .example.env.local to .env and update the value for `NEXT_PUBLIC_OTHENT_API_ID`, `BROWSERLESS_API_KEY` and `NEXT_PUBLIC_API_URL`.
+
+- `NEXT_PUBLIC_OTHENT_API_ID` (required): Get it from [Othent](https://othent.io).
+
+- `BROWSERLESS_API_KEY` (optional): If this value is provided [browerless](https://www.browserless.io/) endpoint is used else Chrome browser is required to capture the webpage and screenshot of the URL with puppeteer. This is not required when `NEXT_PUBLIC_API_URL` value is given.
+
+- `NEXT_PUBLIC_API_URL` (optional): The api can be deployed seperately for archiving present [here](https://github.com/pawanpaudel93/othent-dARchive-api/) and provide its URL which might look like for example: <https://archive-api.com/api/v1/archive>. If this value is not provided, then api included in the Next.js application itself is used.
+
+## Development
+
+```sh
+npm run dev
+
+# or
+
+yarn dev
+```
+
+## Production
+
+```sh
+npm run build
+npm run start
+
+# or
+
+yarn build
+yarn start
+```
+
 ## 🎈 Usage
 
 1. **Archive**: Users can sign in using their Gmail account, visit the archive page, and enter a URL to create an archive. Then, the html and screenshot of the webpage is uploaded via Othent to Arweave to store it permanently.
