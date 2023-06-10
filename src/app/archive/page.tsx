@@ -64,7 +64,7 @@ const Archive = () => {
       setArchive(defaultArchive);
       const accessToken = await getAccessToken();
       const address = userData?.contract_id;
-      const archiveUrl = process.env.NEXT_PUBLIC_API_URL ?? "/api/archive"
+      const archiveUrl = process.env.NEXT_PUBLIC_API_URL ?? "/api/archive";
       const response = await fetch(archiveUrl, {
         method: "POST",
         headers: {
@@ -183,8 +183,9 @@ const Archive = () => {
             )}
           </Formik>
         </Box>
-
-        {!isLoading && archive.id && (
+      </Container>
+      {!isLoading && archive.id && (
+        <Container maxW="5xl">
           <VStack mt="30px">
             <HStack>
               <Text color="green" fontWeight="bold">
@@ -198,7 +199,7 @@ const Archive = () => {
                 onClick={() => setArchive(defaultArchive)}
               />
             </HStack>
-            <TableContainer>
+            <TableContainer width="100%">
               <Table variant="striped">
                 <Tbody>
                   <Tr>
@@ -211,7 +212,9 @@ const Archive = () => {
                   </Tr>
                   <Tr>
                     <Td>Title</Td>
-                    <Td>{archive.title}</Td>
+                    <Td>
+                      <Text>{archive.title}</Text>
+                    </Td>
                   </Tr>
                   <Tr>
                     <Td>Archived Webpage</Td>
@@ -237,8 +240,8 @@ const Archive = () => {
               </Table>
             </TableContainer>
           </VStack>
-        )}
-      </Container>
+        </Container>
+      )}
     </div>
   );
 };
