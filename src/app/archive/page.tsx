@@ -64,7 +64,8 @@ const Archive = () => {
       setArchive(defaultArchive);
       const accessToken = await getAccessToken();
       const address = userData?.contract_id;
-      const response = await fetch("/api/archive", {
+      const archiveUrl = process.env.NEXT_PUBLIC_API_URL ?? "/api/archive"
+      const response = await fetch(archiveUrl, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
