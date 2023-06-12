@@ -3512,10 +3512,10 @@ optionator@^0.9.1:
     type-check "^0.4.0"
     word-wrap "^1.2.3"
 
-othent@^1.0.619:
-  version "1.0.619"
-  resolved "https://registry.npmjs.org/othent/-/othent-1.0.619.tgz#206e6df1e2ba7ca9d29113870b0e9dc04fdeed5e"
-  integrity sha512-Ya7suD6ZxUQ57XFFLwQEVKm11PEnTyqZVwLurVdNMgHpgVrU2oY971pjgDiwqDCIN5lRryUc56VJM/axl1W77Q==
+othent@^1.0.62:
+  version "1.0.62"
+  resolved "https://registry.npmjs.org/othent/-/othent-1.0.62.tgz#48a3d912d43ca64afbf979d4cc232235ec9b6521"
+  integrity sha512-50rDOowK2o//sC8rvrbs940ujebIM+KvfayfPDKmoazrSoRdR6Y1KuWuqB0WQowhAmiVjgBqAnt6dlhFWFXAOA==
   dependencies:
     "@auth0/auth0-spa-js" "^2.0.4"
     axios "^1.3.4"

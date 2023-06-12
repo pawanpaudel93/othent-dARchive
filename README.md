@@ -10,6 +10,9 @@
     <br>
 </p>
 
+> **Note**
+> As this app captures webpage and screenshot using puppeteer and it takes some time to do so and upload it to Arweave. The current free hosting available have a minimum timeout and it cannot be able to archive a URL with such timeout. So you can setup this app locally and try it until i can host the api somewhere.
+
 ## 🧐 About
 
 **dARchive** is a decentralized archiving app that lets you snapshot any webpage anytime to create a digital archive and save it to **[Arweave](https://arweave.org/ "Arweave")** using **[Othent](https://othent.io/ "Othent")** so that you can access it forever.
