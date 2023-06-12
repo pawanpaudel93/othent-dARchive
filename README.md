@@ -11,7 +11,7 @@
 </p>
 
 > **Note**
-> As this app captures webpage and screenshot using puppeteer and it takes some time to do so and upload it to Arweave. The current free hosting available have a minimum timeout and it cannot be able to archive a URL with such timeout. So you can setup this app locally and try it until i can host the api somewhere.
+> As this app captures webpage and screenshot using puppeteer and it takes some time to do so and upload it to Arweave. The current free hosting available have a small timeout and it cannot be able to archive a URL with such timeout. So you can setup this app locally and try it until i can host the api somewhere.
 
 ## 🧐 About
 
