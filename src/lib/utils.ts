@@ -64,6 +64,7 @@ export async function getOthent(apiid?: string) {
   if (othent) return othent;
   othent = await Othent({
     API_ID: apiid || (process.env.NEXT_PUBLIC_OTHENT_API_ID as string),
+    callbackURLs: [window.location.origin],
   });
   return othent;
 }
