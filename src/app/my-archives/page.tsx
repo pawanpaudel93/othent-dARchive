@@ -54,7 +54,7 @@ export default function MyArchives() {
   }
 
   return (
-    <Center>
+    <Center mt={24}>
       {archives.length > 0 ? (
         <Center>
           <TableContainer
@@ -140,7 +140,7 @@ export default function MyArchives() {
         </VStack>
       )}
       {archives.length === 0 && !isLoading && (
-        <Center mt={20}>
+        <Center mt={2}>
           <Alert status="info">
             <AlertIcon />
             No archives found

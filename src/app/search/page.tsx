@@ -193,7 +193,7 @@ export default function Search() {
           </VStack>
         )}
         {archives.length === 0 && url !== "" && searchClicked && !isLoading && (
-          <Center mt={20}>
+          <Center mt={2}>
             <Alert status="info">
               <AlertIcon />
               No archives found
