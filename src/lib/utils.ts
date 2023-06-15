@@ -89,15 +89,8 @@ export async function getAccessToken() {
       file_hash: file_hash,
     }),
   };
-  const isAuthenticated = await auth0.isAuthenticated();
-  if (!isAuthenticated) {
-    await auth0.loginWithPopup({
-      authorizationParams: authParams,
-    });
-  }
   const accessToken = await auth0.getTokenSilently({
     detailedResponse: true,
-    cacheMode: "off",
     authorizationParams: authParams,
   });
   return accessToken;
