@@ -9,7 +9,7 @@ import {
   useColorModeValue,
   VisuallyHidden,
 } from "@chakra-ui/react";
-import { FaInstagram, FaTwitter, FaYoutube } from "react-icons/fa";
+import { FaGithub, FaTwitter } from "react-icons/fa";
 import { ReactNode } from "react";
 
 const Logo = () => {
@@ -75,14 +75,17 @@ export function Footer() {
         <Logo />
         <Text>©2023 Decentralized ARchive. All rights reserved</Text>
         <Stack direction={"row"} spacing={6}>
-          <SocialButton label={"Twitter"} href={"#"}>
+          <SocialButton
+            label={"Twitter"}
+            href={"https://twitter.com/Blokchainaholic"}
+          >
             <FaTwitter />
           </SocialButton>
-          <SocialButton label={"YouTube"} href={"#"}>
-            <FaYoutube />
-          </SocialButton>
-          <SocialButton label={"Instagram"} href={"#"}>
-            <FaInstagram />
+          <SocialButton
+            label={"Github"}
+            href={"https://github.com/pawanpaudel93"}
+          >
+            <FaGithub />
           </SocialButton>
         </Stack>
       </Container>
