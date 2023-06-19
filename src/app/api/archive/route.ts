@@ -11,15 +11,14 @@ export async function POST(request: Request) {
     const { url, accessToken, address } = await request.json();
 
     const saver = new HtmlScreenshotSaver(
-      process.env.BROWSERLESS_API_KEY
+      {
+        browserlessOptions: process.env.BROWSERLESS_API_KEY
         ? {
             apiKey: process.env.BROWSERLESS_API_KEY as string,
-            windowSize: "1920,1080",
-            userAgent:
-              "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36",
             timeout: 60000,
           }
         : undefined
+      }
     );
 
     const result = await saver.save(url);
