@@ -12,6 +12,7 @@ export async function POST(request: Request) {
 
     const saver = new HtmlScreenshotSaver(
       {
+        saveScreenshot: true,
         browserlessOptions: process.env.BROWSERLESS_API_KEY
         ? {
             apiKey: process.env.BROWSERLESS_API_KEY as string,
